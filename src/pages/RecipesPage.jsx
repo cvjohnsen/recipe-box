@@ -16,6 +16,12 @@ function RecipesPage() {
   const [formData, setFormData] = useState(initialFormData);
   const [error, setError] = useState("");
 
+  function handleDelete(id) {
+    setRecipes((currentRecipes) =>
+      currentRecipes.filter((recipe) => recipe.id !== id)
+    );
+  }
+
   useEffect(() => {
     const timer = setTimeout(() => {
       setRecipes(recipeData);
@@ -73,7 +79,11 @@ function RecipesPage() {
         error={error}
       />
 
-      {loading ? <p>Loading recipes...</p> : <RecipeList recipes={recipes} />}
+      {loading ? (
+        <p>Loading recipes...</p>
+      ) : (
+        <RecipeList recipes={recipes} onDelete={handleDelete} />
+      )}
     </section>
   );
 }

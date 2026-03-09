@@ -147,3 +147,18 @@ h3 {
   color: #a12626;
   font-weight: 600;
 }
+
+.delete-button {
+  margin-top: 0.75rem;
+  padding: 0.5rem 0.9rem;
+  border: none;
+  border-radius: 8px;
+  background-color: #e56b6f;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.delete-button:hover {
+  opacity: 0.9;
+}
