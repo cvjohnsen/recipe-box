@@ -16,6 +16,16 @@ function RecipesPage() {
   const [formData, setFormData] = useState(initialFormData);
   const [error, setError] = useState("");
 
+  function handleToggleFavorite(id) {
+  setRecipes((currentRecipes) =>
+    currentRecipes.map((recipe) =>
+      recipe.id === id
+        ? { ...recipe, favorite: !recipe.favorite }
+        : recipe
+    )
+  );
+}
+
   function handleDelete(id) {
     setRecipes((currentRecipes) =>
       currentRecipes.filter((recipe) => recipe.id !== id)
