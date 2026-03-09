@@ -19,12 +19,7 @@ function RecipesPage() {
     <section>
       <h2>Recipes</h2>
       <p>Browse your saved recipes.</p>
-
-      {loading ? (
-        <p>Loading recipes...</p>
-      ) : (
-        <RecipeList recipes={recipes} />
-      )}
+      {loading ? <p>Loading recipes...</p> : <RecipeList recipes={recipes} />}
     </section>
   );
 }
