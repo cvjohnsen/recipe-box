@@ -23,6 +23,30 @@ const recipeData = [
     instructions: "Mix ingredients and bake until done.",
     favorite: true,
   },
+ {
+    id: "4",
+    title: "Caesar Salad",
+    category: "Lunch",
+    ingredients: "Romaine lettuce, croutons, parmesan, Caesar dressing",
+    instructions: "Toss all ingredients together and serve chilled.",
+    favorite: false,
+  },
+  {
+    id: "5",
+    title: "Spaghetti Bolognese",
+    category: "Dinner",
+    ingredients: "Ground beef, tomato sauce, spaghetti, garlic, onion",
+    instructions: "Cook pasta, simmer meat sauce, combine and serve.",
+    favorite: true,
+  },
+  {
+    id: "6",
+    title: "Banana Smoothie",
+    category: "Breakfast",
+    ingredients: "Banana, milk, honey, yogurt",
+    instructions: "Blend all ingredients until smooth.",
+    favorite: false,
+  },
 ];
 
 export default recipeData;
