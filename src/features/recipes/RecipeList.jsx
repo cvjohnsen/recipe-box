@@ -1,4 +1,5 @@
 import RecipeCard from "./RecipeCard";
+import Card from "../../shared/Card";
 
 function RecipeList({ recipes, onDelete, onToggleFavorite, onEdit }) {
   if (recipes.length === 0) {
@@ -8,6 +9,7 @@ function RecipeList({ recipes, onDelete, onToggleFavorite, onEdit }) {
   return (
     <div className="card-grid">
       {recipes.map((recipe) => (
+        <Card key={recipe.id}>
         <RecipeCard
           key={recipe.id}
           recipe={recipe}
@@ -15,6 +17,7 @@ function RecipeList({ recipes, onDelete, onToggleFavorite, onEdit }) {
           onToggleFavorite={onToggleFavorite}
           onEdit={onEdit}
         />
+        </Card>
       ))}
     </div>
   );
