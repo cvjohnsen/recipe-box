@@ -1,7 +1,7 @@
-function RecipeForm({ formData, onChange, onSubmit, error }) {
+function RecipeForm({ formData, onChange, onSubmit, error, editingId }) {
   return (
     <form className="recipe-form" onSubmit={onSubmit}>
-      <h3>Add a Recipe</h3>
+      <h3>{editingId ? "Edit Recipe" : "Add a Recipe"}</h3>
 
       <label htmlFor="title">Recipe Title</label>
       <input
@@ -47,7 +47,7 @@ function RecipeForm({ formData, onChange, onSubmit, error }) {
       {error ? <p className="form-error">{error}</p> : null}
 
       <button type="submit" className="submit-button">
-        Add Recipe
+        {editingId ? "Update Recipe" : "Add Recipe"}
       </button>
     </form>
   );

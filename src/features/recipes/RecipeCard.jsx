@@ -1,4 +1,4 @@
-function RecipeCard({ recipe, onDelete, onToggleFavorite }) {
+function RecipeCard({ recipe, onDelete, onToggleFavorite, onEdit }) {
   return (
     <article className="card">
       <h3>{recipe.title}</h3>
@@ -25,10 +25,11 @@ function RecipeCard({ recipe, onDelete, onToggleFavorite }) {
           {recipe.favorite ? "Unfavorite" : "Favorite"}
         </button>
 
-        <button
-          className="delete-button"
-          onClick={() => onDelete(recipe.id)}
-        >
+        <button className="edit-button" onClick={() => onEdit(recipe.id)}>
+          Edit
+        </button>
+
+        <button className="delete-button" onClick={() => onDelete(recipe.id)}>
           Delete
         </button>
       </div>

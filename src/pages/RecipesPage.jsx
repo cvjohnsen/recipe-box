@@ -15,6 +15,7 @@ function RecipesPage() {
   const [loading, setLoading] = useState(true);
   const [formData, setFormData] = useState(initialFormData);
   const [error, setError] = useState("");
+  const [editingId, setEditingId] = useState(null);
 
   function handleDelete(id) {
     setRecipes((currentRecipes) =>
@@ -30,6 +31,22 @@ function RecipesPage() {
           : recipe
       )
     );
+  }
+
+  function handleEdit(id) {
+    const recipeToEdit = recipes.find((recipe) => recipe.id === id);
+
+    if (!recipeToEdit) return;
+
+    setFormData({
+      title: recipeToEdit.title,
+      category: recipeToEdit.category,
+      ingredients: recipeToEdit.ingredients,
+      instructions: recipeToEdit.instructions,
+    });
+
+    setEditingId(id);
+    setError("");
   }
 
   useEffect(() => {
@@ -76,16 +93,35 @@ function RecipesPage() {
       return;
     }
 
-    const newRecipe = {
-      id: crypto.randomUUID(),
-      title: formData.title,
-      category: formData.category,
-      ingredients: formData.ingredients,
-      instructions: formData.instructions,
-      favorite: false,
-    };
+    if (editingId) {
+      setRecipes((currentRecipes) =>
+        currentRecipes.map((recipe) =>
+          recipe.id === editingId
+            ? {
+                ...recipe,
+                title: formData.title,
+                category: formData.category,
+                ingredients: formData.ingredients,
+                instructions: formData.instructions,
+              }
+            : recipe
+        )
+      );
 
-    setRecipes((currentRecipes) => [newRecipe, ...currentRecipes]);
+      setEditingId(null);
+    } else {
+      const newRecipe = {
+        id: crypto.randomUUID(),
+        title: formData.title,
+        category: formData.category,
+        ingredients: formData.ingredients,
+        instructions: formData.instructions,
+        favorite: false,
+      };
+
+      setRecipes((currentRecipes) => [newRecipe, ...currentRecipes]);
+    }
+
     setFormData(initialFormData);
     setError("");
   }
@@ -100,6 +136,7 @@ function RecipesPage() {
         onChange={handleChange}
         onSubmit={handleSubmit}
         error={error}
+        editingId={editingId}
       />
 
       {loading ? (
@@ -109,6 +146,7 @@ function RecipesPage() {
           recipes={recipes}
           onDelete={handleDelete}
           onToggleFavorite={handleToggleFavorite}
+          onEdit={handleEdit}
         />
       )}
     </section>

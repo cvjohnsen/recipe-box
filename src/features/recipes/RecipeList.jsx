@@ -1,6 +1,6 @@
 import RecipeCard from "./RecipeCard";
 
-function RecipeList({ recipes, onDelete, onToggleFavorite }) {
+function RecipeList({ recipes, onDelete, onToggleFavorite, onEdit }) {
   if (recipes.length === 0) {
     return <p>No recipes yet.</p>;
   }
@@ -13,6 +13,7 @@ function RecipeList({ recipes, onDelete, onToggleFavorite }) {
           recipe={recipe}
           onDelete={onDelete}
           onToggleFavorite={onToggleFavorite}
+          onEdit={onEdit}
         />
       ))}
     </div>

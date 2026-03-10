@@ -184,3 +184,18 @@ h3 {
 .favorite-button:hover {
   opacity: 0.9;
 }
+
+.edit-button {
+  margin-top: 0.75rem;
+  padding: 0.5rem 0.9rem;
+  border: none;
+  border-radius: 8px;
+  background-color: #d7b9f1;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.edit-button:hover {
+  opacity: 0.9;
+}
