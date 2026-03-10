@@ -16,30 +16,43 @@ function RecipesPage() {
   const [formData, setFormData] = useState(initialFormData);
   const [error, setError] = useState("");
 
-  function handleToggleFavorite(id) {
-  setRecipes((currentRecipes) =>
-    currentRecipes.map((recipe) =>
-      recipe.id === id
-        ? { ...recipe, favorite: !recipe.favorite }
-        : recipe
-    )
-  );
-}
-
   function handleDelete(id) {
     setRecipes((currentRecipes) =>
       currentRecipes.filter((recipe) => recipe.id !== id)
     );
   }
 
+  function handleToggleFavorite(id) {
+    setRecipes((currentRecipes) =>
+      currentRecipes.map((recipe) =>
+        recipe.id === id
+          ? { ...recipe, favorite: !recipe.favorite }
+          : recipe
+      )
+    );
+  }
+
   useEffect(() => {
     const timer = setTimeout(() => {
-      setRecipes(recipeData);
+      const savedRecipes = localStorage.getItem("recipes");
+
+      if (savedRecipes) {
+        setRecipes(JSON.parse(savedRecipes));
+      } else {
+        setRecipes(recipeData);
+      }
+
       setLoading(false);
     }, 500);
 
     return () => clearTimeout(timer);
   }, []);
+
+  useEffect(() => {
+    if (!loading) {
+      localStorage.setItem("recipes", JSON.stringify(recipes));
+    }
+  }, [recipes, loading]);
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -92,7 +105,11 @@ function RecipesPage() {
       {loading ? (
         <p>Loading recipes...</p>
       ) : (
-        <RecipeList recipes={recipes} onDelete={handleDelete} />
+        <RecipeList
+          recipes={recipes}
+          onDelete={handleDelete}
+          onToggleFavorite={handleToggleFavorite}
+        />
       )}
     </section>
   );
