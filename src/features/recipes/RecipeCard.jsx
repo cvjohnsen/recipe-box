@@ -1,6 +1,6 @@
 function RecipeCard({ recipe, onDelete, onToggleFavorite, onEdit }) {
   return (
-    <article className="card">
+    <article className="recipe-card">
       <h3>{recipe.title}</h3>
 
       <p>

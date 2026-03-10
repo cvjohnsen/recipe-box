@@ -73,14 +73,48 @@ h3 {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 1.25rem;
-  margin-top: 1.5rem;
+  margin-top: 1rem;
 }
 
 .card {
   background-color: white;
-  border: 1px solid #f1d5b5;
-  border-radius: 12px;
-  padding: 1.25rem;
+  border-radius: 14px;
+  padding: 1.2rem;
+  border: 1px solid #e7cdb7;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+}
+
+.card h3 {
+  margin-top: 0;
+  margin-bottom: 0.8rem;
+}
+
+.card p {
+  margin: 0.4rem 0;
+}
+
+.card-actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: auto;
+  padding-top: 1rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.recipe-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .nav-inner {
@@ -95,7 +129,7 @@ h3 {
 .home-image {
   margin-top: 1.5rem;
   width: 100%;
-  max-width: 700px;
+  max-width: 900px;
   border-radius: 16px;
   border: 1px solid #e7cdb7;
 }
@@ -103,17 +137,18 @@ h3 {
 .recipe-form {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 0.5rem;
   background-color: rgba(255, 255, 255, 0.45);
   border: 1px solid #e7cdb7;
   border-radius: 16px;
-  padding: 1.25rem;
-  margin: 1.5rem 0 2rem;
-  max-width: 700px;
+  padding: 1rem 1.1rem;
+  margin: 1.5rem auto 2rem;
+  max-width: 980px;
 }
 
 .recipe-form label {
   font-weight: 600;
+  margin-top: 0.2rem;
 }
 
 .recipe-form input,
@@ -127,8 +162,51 @@ h3 {
   background-color: white;
 }
 
+.recipe-form input,
+.recipe-form textarea,
+.recipe-form select {
+  max-width: 100%;
+}
+
 .recipe-form textarea {
   resize: vertical;
+  min-height: 90px;
+}
+
+.favorite-button,
+.edit-button,
+.delete-button {
+  padding: 0.5rem 0.9rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.recipe-form h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.recipe-form label {
+  font-weight: 600;
+  margin-top: 0.25rem;
+}
+
+.favorite-button {
+  background-color: #f6f2b6;
+  color: rgb(2, 2, 2);
+}
+
+.edit-button {
+  background-color: #d7b9f1;
+  color: white;
+}
+
+.delete-button {
+  background-color: #e56b6f;
+  color: white;
 }
 
 .submit-button {
@@ -148,56 +226,24 @@ h3 {
   font-weight: 600;
 }
 
-.delete-button {
-  margin-top: 0.75rem;
-  padding: 0.5rem 0.9rem;
-  border: none;
-  border-radius: 8px;
-  background-color: #e56b6f;
-  color: white;
-  font-weight: 600;
-  cursor: pointer;
-}
-
 .delete-button:hover {
   opacity: 0.9;
-}
-
-.card-actions {
-  display: flex;
-  gap: 0.75rem;
-  margin-top: 1rem;
-  flex-wrap: wrap;
-}
-
-.favorite-button {
-  margin-top: 0.75rem;
-  padding: 0.5rem 0.9rem;
-  border: none;
-  border-radius: 8px;
-  background-color: #f6f2b6;
-  color: rgb(2, 2, 2);
-  font-weight: 600;
-  cursor: pointer;
 }
 
 .favorite-button:hover {
   opacity: 0.9;
 }
 
-.edit-button {
-  margin-top: 0.75rem;
-  padding: 0.5rem 0.9rem;
-  border: none;
-  border-radius: 8px;
-  background-color: #d7b9f1;
-  color: white;
-  font-weight: 600;
-  cursor: pointer;
-}
-
 .edit-button:hover {
   opacity: 0.9;
+}
+
+button {
+  transition: transform 0.1s ease;
+}
+
+button:hover {
+  transform: scale(1.03);
 }
 
 .filter-bar {
@@ -209,8 +255,8 @@ h3 {
   border: 1px solid #e7cdb7;
   border-radius: 16px;
   padding: 1rem 1.25rem;
-  margin-bottom: 1.5rem;
-  max-width: 700px;
+  margin: 0 auto 1.5rem;
+  max-width: 1100px;
 }
 
 .filter-group {
