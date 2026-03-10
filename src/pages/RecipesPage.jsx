@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import recipeData from "../features/recipes/recipeData";
 import RecipeList from "../features/recipes/RecipeList";
 import RecipeForm from "../features/recipes/RecipeForm";
+import RecipeFilter from "../features/recipes/RecipeFilter";
 
 const initialFormData = {
   title: "",
@@ -16,6 +17,8 @@ function RecipesPage() {
   const [formData, setFormData] = useState(initialFormData);
   const [error, setError] = useState("");
   const [editingId, setEditingId] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
 
   function handleDelete(id) {
     setRecipes((currentRecipes) =>
@@ -126,6 +129,25 @@ function RecipesPage() {
     setError("");
   }
 
+  const filteredRecipes = useCallback(() => {
+    return recipes.filter((recipe) => {
+      const matchesCategory =
+        selectedCategory === "All" || recipe.category === selectedCategory;
+
+      const matchesFavorite = showFavoritesOnly ? recipe.favorite : true;
+
+      return matchesCategory && matchesFavorite;
+    });
+  }, [recipes, selectedCategory, showFavoritesOnly]);
+
+  function handleCategoryChange(event) {
+    setSelectedCategory(event.target.value);
+  }
+
+  function handleFavoritesChange(event) {
+    setShowFavoritesOnly(event.target.checked);
+  }
+
   return (
     <section>
       <h2>Recipes</h2>
@@ -139,11 +161,18 @@ function RecipesPage() {
         editingId={editingId}
       />
 
+      <RecipeFilter
+        selectedCategory={selectedCategory}
+        showFavoritesOnly={showFavoritesOnly}
+        onCategoryChange={handleCategoryChange}
+        onFavoritesChange={handleFavoritesChange}
+      />
+
       {loading ? (
         <p>Loading recipes...</p>
       ) : (
         <RecipeList
-          recipes={recipes}
+          recipes={filteredRecipes()}
           onDelete={handleDelete}
           onToggleFavorite={handleToggleFavorite}
           onEdit={handleEdit}
